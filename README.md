@@ -1,19 +1,26 @@
 Дипломная работа для netology.ru
+
 Описание:
+
   Корневая папка репозитория содержит два script bat файла для автоматического запуска docker контейнеров (MySQL, Posgtres, payment-gate) и aqa-shop.jar приложения и процесса тестирования.
+  
   Скрипт выполняет следующие шаги:
-    1. Перезаписывает application.properties файл следующим файлом: application-mysql.properties, application-postgres.properties в зависимости от используемой базы данных.
-    2. Запускаються Docker-ом контейнеры из файла docker-compose.yml
-    3. Запускаеться aqa-shop web приложение
-    4. После 15 секундного таймаута, запускаеться gradlew test
-  Проект содержит 18 тестов: 
-    - 16 UI тестов:
-        1. 8 UI (buyUI_*) тестов для тестирования валидаций ввода данных банковской карты после нажатия кнопки "Купить"
-        2. 8 UI (buyCreditUI_*) тестов для тестирования валидаций ввода данных банковской карты после нажатия кнопки "Купить в кредит"
-    - 2 БД теста 
-      1. buyCredit_CheckExistingApprovedRecordsInDatabase - проверка наличия записи APPROVED в credit_request_entity таблице после добавляения в UI через кнопку "Купить".
-      2. buy_CheckExistingApprovedRecordsInDatabase - проверка наличия записи APPROVED в payment_entity таблице после добавляения в UI через кнопку "Купить в кредит".
-    ! Тесты используют application.properties для настройки соединения с БД.
+  
+ 1. Перезаписывает application.properties файл следующим файлом: application-mysql.properties, application-postgres.properties в зависимости от используемой базы данных.
+2. Запускаются Docker-ом контейнеры из файла docker-compose.yml
+3. Запускается aqa-shop web приложение
+4. После 15 секундного таймаута, запускается gradlew test
+   
+  Проект содержит 18 тестов:
+  
+- 16 UI тестов:
+  1. 8 UI (buyUI_*) тестов для тестирования валидаций ввода данных банковской карты после нажатия кнопки "Купить"
+  2. 8 UI (buyCreditUI_*) тестов для тестирования валидаций ввода данных банковской карты после нажатия кнопки "Купить в кредит"
+ - 2 БД теста 
+  1. buyCredit_CheckExistingApprovedRecordsInDatabase - проверка наличия записи APPROVED в credit_request_entity таблице после добавляения в UI через кнопку "Купить".
+ 2. buy_CheckExistingApprovedRecordsInDatabase - проверка наличия записи APPROVED в payment_entity таблице после добавляения в UI через кнопку "Купить в кредит".
+
+! Тесты используют application.properties для настройки соединения с БД.
       
 Для запуска необходимо:
 Необходимо установить на компьютер:
