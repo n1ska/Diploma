@@ -34,27 +34,12 @@ public class DataGenerator {
     public static int generateCardExpiryYearNoValid() {
         return getCurrentYear() - generateIntNum(1, 10);
     }
-
-    public static int generateCardExpiryMonthNoValid(int year) {
-        if (year == getCurrentYear()) {
-            var monthBeforeCurrentMonth = getCurrentMonth() - 1;
-            return getCurrentMonth() - generateIntNum(1, monthBeforeCurrentMonth);
-        }
-
-        return generateIntNum(1, LastMonthOfYear);
-    }
-
     public static int generateCardExpiryYearValid() {
         return getCurrentYear() + generateIntNum(0, 5);
     }
 
     public static int generateCardExpiryMonthValid(int year) {
-        if (year == getCurrentYear()) {
-            var leastMonthForEndYear = LastMonthOfYear - getCurrentMonth();
-            return getCurrentMonth() + generateIntNum(1, leastMonthForEndYear);
-        }
-
-        return generateIntNum(1, LastMonthOfYear);
+        return getCurrentMonth();
     }
 
     private static int generateIntNum(int start, int bound) {

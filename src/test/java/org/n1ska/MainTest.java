@@ -3,6 +3,7 @@ package org.n1ska;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.n1ska.utils.DataBaseHelper;
 import org.n1ska.utils.DataGenerator;
 import org.n1ska.page.TravelDayPage;
 import org.n1ska.utils.PlasticCard;
@@ -248,55 +249,31 @@ class MainTest {
 
     @Test
     void buyCredit_CheckExistingApprovedRecordsInDatabase() {
-        int countRecords = 0;
+        DataBaseHelper.deleteAllCreditRequestEntityTableRecords(dataBaseUrl, dataBaseUserName, dataBaseUserPass);
 
-        try (Connection conn = DriverManager.getConnection(dataBaseUrl, dataBaseUserName, dataBaseUserPass);
-             Statement stmt = conn.createStatement();) {
-            stmt.executeUpdate("DELETE FROM credit_request_entity");
+        var page = new TravelDayPage();
+        var form = page.clickCreditBuyButtonAndReturnForm();
+        plasticValidCard.setCardNo(ValidPlasicCardNo);
+        form.setCard(plasticValidCard);
+        form.clickContinueButton();
+        page.notificationSuccessVisibleAndContains("Операция одобрена Банком.");
 
-            var page = new TravelDayPage();
-            var form = page.clickCreditBuyButtonAndReturnForm();
-            plasticValidCard.setCardNo(ValidPlasicCardNo);
-            form.setCard(plasticValidCard);
-            form.clickContinueButton();
-            page.notificationSuccessVisibleAndContains("Операция одобрена Банком.");
-
-            try (ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM credit_request_entity WHERE STATUS='APPROVED'")) {
-                if (rs.next()) {
-                    countRecords = rs.getInt(1);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+        int countRecords = DataBaseHelper.getCountApprovedCreditRequestEntities(dataBaseUrl, dataBaseUserName, dataBaseUserPass);
         Assertions.assertEquals(1, countRecords);
     }
 
     @Test
     void buy_CheckExistingApprovedRecordsInDatabase() {
-        int countRecords = 0;
+        DataBaseHelper.deleteAllPaymentEntityTableRecords(dataBaseUrl, dataBaseUserName, dataBaseUserPass);
 
-        try (Connection conn = DriverManager.getConnection(dataBaseUrl, dataBaseUserName, dataBaseUserPass);
-             Statement stmt = conn.createStatement();) {
-            stmt.executeUpdate("DELETE FROM payment_entity");
+        var page = new TravelDayPage();
+        var form = page.clickBuyButtonAndReturnForm();
+        plasticValidCard.setCardNo(ValidPlasicCardNo);
+        form.setCard(plasticValidCard);
+        form.clickContinueButton();
+        page.notificationSuccessVisibleAndContains("Операция одобрена Банком.");
 
-            var page = new TravelDayPage();
-            var form = page.clickBuyButtonAndReturnForm();
-            plasticValidCard.setCardNo(ValidPlasicCardNo);
-            form.setCard(plasticValidCard);
-            form.clickContinueButton();
-            page.notificationSuccessVisibleAndContains("Операция одобрена Банком.");
-
-            try (ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM payment_entity WHERE STATUS='APPROVED'")) {
-                if (rs.next()) {
-                    countRecords = rs.getInt(1);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+        int countRecords = DataBaseHelper.getCountApprovedPaymentEntities(dataBaseUrl, dataBaseUserName, dataBaseUserPass);
         Assertions.assertEquals(1, countRecords);
     }
 }
