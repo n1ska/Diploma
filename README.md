@@ -3,7 +3,7 @@
 ## Описание:
 Корневая папка репозитория содержит следующие директории: 
 - docs - документация по выполненой работе
-1. [Plan.md]([docs/Plan.md])
+1. [Plan.md](docs/Plan.md)
 2. [Report.md](docs/Report.md)
 3. [Summary.md](docs/Summary.md)
 - artifacts - исходные приложения для тестирования.
