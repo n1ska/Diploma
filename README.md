@@ -1,22 +1,22 @@
-Дипломная работа для netology.ru
+# Дипломная работа для netology.ru
 
-Описание:
-  Корневая папка репозитория содержит следующие директории: 
-    - docs - документация по выполненой работе
-      1. ![Plan.md]([https://github.com/n1ska/diploma/blob/main/docs/Plan.md])
-      2. ![Report.md](https://github.com/n1ska/diploma/blob/main/docs/Report.md)
-      3. ![Summary.md](https://github.com/n1ska/diploma/blob/main/docs/Summary.md)
-    - artifacts - исходные приложения для тестирования.
-    - src - исходники тестов
-    - reports - сгенерированный отчеты пройденных тестов
+## Описание:
+Корневая папка репозитория содержит следующие директории: 
+- docs - документация по выполненой работе
+1. ![Plan.md]([https://github.com/n1ska/diploma/blob/main/docs/Plan.md])
+2. ![Report.md](https://github.com/n1ska/diploma/blob/main/docs/Report.md)
+3. ![Summary.md](https://github.com/n1ska/diploma/blob/main/docs/Summary.md)
+- artifacts - исходные приложения для тестирования.
+- src - исходники тестов
+- reports - сгенерированный отчеты пройденных тестов
     
-Для выполнения тестов:
+## Для выполнения тестов:
 
-Необходимо установить на компьютер:
+### Необходимо установить на компьютер:
   1. Docker Desktop
   2. Openjdk 11.0.20
 
-Выполнить следующие шаги:
+### Выполнить следующие шаги:
   1. Средствами коммандной строки, необходимо перезаписать файл application.properties файлом application-<db_type>.properties в зависимости от теста приложения на MySql или Postgres базы данными:
   Для использования под Windows можно использовать следующий скрипт:
   xcopy /f /y artifacts\application-mysql.properties artifacts\application.properties
