@@ -3,14 +3,13 @@ package org.n1ska;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.n1ska.page.MainPage;
 import org.n1ska.utils.DataBaseHelper;
 import org.n1ska.utils.DataGenerator;
-import org.n1ska.page.TravelDayPage;
 import org.n1ska.utils.PlasticCard;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.*;
 import java.util.Properties;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -57,8 +56,8 @@ class MainTest {
 
     @Test
     void buyUI_CheckNotValidExpiryMonth_ReturnUnderlineMessage() {
-        var page = new TravelDayPage();
-        var form = page.clickBuyButtonAndReturnForm();
+        var page = new MainPage();
+        var form = page.clickBuyButtonAndReturnPage();
         plasticValidCard.setExpiryMonth("14");
         form.setCard(plasticValidCard);
 
@@ -69,8 +68,8 @@ class MainTest {
 
     @Test
     void buyUI_CheckNotValidFormatExpiryMonth_ReturnUnderlineMessage() {
-        var page = new TravelDayPage();
-        var form = page.clickBuyButtonAndReturnForm();
+        var page = new MainPage();
+        var form = page.clickBuyButtonAndReturnPage();
         plasticValidCard.setExpiryMonth("4");
         form.setCard(plasticValidCard);
 
@@ -81,8 +80,8 @@ class MainTest {
 
     @Test
     void buyUI_CheckNotValidExpiryYear_ReturnUnderlineMessage() {
-        var page = new TravelDayPage();
-        var form = page.clickBuyButtonAndReturnForm();
+        var page = new MainPage();
+        var form = page.clickBuyButtonAndReturnPage();
         plasticValidCard.setExpiryYear(String.valueOf(DataGenerator.generateCardExpiryYearNoValid()));
         form.setCard(plasticValidCard);
 
@@ -93,8 +92,8 @@ class MainTest {
 
     @Test
     void buyUI_CheckNotValidFormatExpiryYear_ReturnUnderlineMessage() {
-        var page = new TravelDayPage();
-        var form = page.clickBuyButtonAndReturnForm();
+        var page = new MainPage();
+        var form = page.clickBuyButtonAndReturnPage();
         plasticValidCard.setExpiryYear("1");
         form.setCard(plasticValidCard);
 
@@ -105,8 +104,8 @@ class MainTest {
 
     @Test
     void buyUI_CheckNotValidFormatPassCode_ReturnUnderlineMessage() {
-        var page = new TravelDayPage();
-        var form = page.clickBuyButtonAndReturnForm();
+        var page = new MainPage();
+        var form = page.clickBuyButtonAndReturnPage();
         plasticValidCard.setPassCode(String.valueOf(DataGenerator.generateCardPassCodeNotValid()));
         form.setCard(plasticValidCard);
 
@@ -117,8 +116,8 @@ class MainTest {
 
     @Test
     void buyUI_CheckEmptyCardHolder_ReturnUnderlineMessage() {
-        var page = new TravelDayPage();
-        var form = page.clickBuyButtonAndReturnForm();
+        var page = new MainPage();
+        var form = page.clickBuyButtonAndReturnPage();
         plasticValidCard.setHolderName("");
         form.setCard(plasticValidCard);
 
@@ -129,8 +128,8 @@ class MainTest {
 
     @Test
     void buyUI_CheckCardRejectFromBankGate_ReturnUnderlineMessage() {
-        var page = new TravelDayPage();
-        var form = page.clickBuyButtonAndReturnForm();
+        var page = new MainPage();
+        var form = page.clickBuyButtonAndReturnPage();
         plasticValidCard.setCardNo(DataGenerator.generateCardNo());
         form.setCard(plasticValidCard);
 
@@ -141,8 +140,8 @@ class MainTest {
 
     @Test
     void buyUI_CheckCardSuccessFromBankGate_ReturnSuccessMessage() {
-        var page = new TravelDayPage();
-        var form = page.clickBuyButtonAndReturnForm();
+        var page = new MainPage();
+        var form = page.clickBuyButtonAndReturnPage();
         plasticValidCard.setCardNo(ValidPlasicCardNo);
         form.setCard(plasticValidCard);
 
@@ -153,8 +152,8 @@ class MainTest {
 
     @Test
     void buyCreditUI_CheckNotValidExpiryMonth_ReturnUnderlineMessage() {
-        var page = new TravelDayPage();
-        var form = page.clickCreditBuyButtonAndReturnForm();
+        var page = new MainPage();
+        var form = page.clickCreditBuyButtonAndReturnPage();
         plasticValidCard.setExpiryMonth("14");
         form.setCard(plasticValidCard);
 
@@ -165,8 +164,8 @@ class MainTest {
 
     @Test
     void buyCreditUI_CheckNotValidFormatExpiryMonth_ReturnUnderlineMessage() {
-        var page = new TravelDayPage();
-        var form = page.clickCreditBuyButtonAndReturnForm();
+        var page = new MainPage();
+        var form = page.clickCreditBuyButtonAndReturnPage();
         plasticValidCard.setExpiryMonth("4");
         form.setCard(plasticValidCard);
 
@@ -177,8 +176,8 @@ class MainTest {
 
     @Test
     void buyCreditUI_CheckNotValidExpiryYear_ReturnUnderlineMessage() {
-        var page = new TravelDayPage();
-        var form = page.clickCreditBuyButtonAndReturnForm();
+        var page = new MainPage();
+        var form = page.clickCreditBuyButtonAndReturnPage();
         plasticValidCard.setExpiryYear(String.valueOf(DataGenerator.generateCardExpiryYearNoValid()));
         form.setCard(plasticValidCard);
 
@@ -189,8 +188,8 @@ class MainTest {
 
     @Test
     void buyCreditUI_CheckNotValidFormatExpiryYear_ReturnUnderlineMessage() {
-        var page = new TravelDayPage();
-        var form = page.clickCreditBuyButtonAndReturnForm();
+        var page = new MainPage();
+        var form = page.clickCreditBuyButtonAndReturnPage();
         plasticValidCard.setExpiryYear("1");
         form.setCard(plasticValidCard);
 
@@ -201,8 +200,8 @@ class MainTest {
 
     @Test
     void buyCreditUI_CheckNotValidFormatPassCode_ReturnUnderlineMessage() {
-        var page = new TravelDayPage();
-        var form = page.clickCreditBuyButtonAndReturnForm();
+        var page = new MainPage();
+        var form = page.clickCreditBuyButtonAndReturnPage();
         plasticValidCard.setPassCode(String.valueOf(DataGenerator.generateCardPassCodeNotValid()));
         form.setCard(plasticValidCard);
 
@@ -213,8 +212,8 @@ class MainTest {
 
     @Test
     void buyCreditUI_CheckEmptyCardHolder_ReturnUnderlineMessage() {
-        var page = new TravelDayPage();
-        var form = page.clickCreditBuyButtonAndReturnForm();
+        var page = new MainPage();
+        var form = page.clickCreditBuyButtonAndReturnPage();
         plasticValidCard.setHolderName("");
         form.setCard(plasticValidCard);
 
@@ -225,8 +224,8 @@ class MainTest {
 
     @Test
     void buyCreditUI_CheckCardRejectFromBankGate_ReturnUnderlineMessage() {
-        var page = new TravelDayPage();
-        var form = page.clickCreditBuyButtonAndReturnForm();
+        var page = new MainPage();
+        var form = page.clickCreditBuyButtonAndReturnPage();
         plasticValidCard.setCardNo(DataGenerator.generateCardNo());
         form.setCard(plasticValidCard);
 
@@ -237,8 +236,8 @@ class MainTest {
 
     @Test
     void buyCreditUI_CheckCardSuccessFromBankGate_ReturnSuccessMessage() {
-        var page = new TravelDayPage();
-        var form = page.clickCreditBuyButtonAndReturnForm();
+        var page = new MainPage();
+        var form = page.clickCreditBuyButtonAndReturnPage();
         plasticValidCard.setCardNo(ValidPlasicCardNo);
         form.setCard(plasticValidCard);
 
@@ -251,8 +250,8 @@ class MainTest {
     void buyCredit_CheckExistingApprovedRecordsInDatabase() {
         DataBaseHelper.deleteAllCreditRequestEntityTableRecords(dataBaseUrl, dataBaseUserName, dataBaseUserPass);
 
-        var page = new TravelDayPage();
-        var form = page.clickCreditBuyButtonAndReturnForm();
+        var page = new MainPage();
+        var form = page.clickCreditBuyButtonAndReturnPage();
         plasticValidCard.setCardNo(ValidPlasicCardNo);
         form.setCard(plasticValidCard);
         form.clickContinueButton();
@@ -266,8 +265,8 @@ class MainTest {
     void buy_CheckExistingApprovedRecordsInDatabase() {
         DataBaseHelper.deleteAllPaymentEntityTableRecords(dataBaseUrl, dataBaseUserName, dataBaseUserPass);
 
-        var page = new TravelDayPage();
-        var form = page.clickBuyButtonAndReturnForm();
+        var page = new MainPage();
+        var form = page.clickBuyButtonAndReturnPage();
         plasticValidCard.setCardNo(ValidPlasicCardNo);
         form.setCard(plasticValidCard);
         form.clickContinueButton();

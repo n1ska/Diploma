@@ -8,7 +8,6 @@ import java.util.Random;
 
 public class DataGenerator {
     private static Locale DefaultLocale = new Locale("ru");
-    private static int LastMonthOfYear = 12;
 
     private DataGenerator() {
     }
