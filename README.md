@@ -2,10 +2,13 @@
 
 Описание:
   Корневая папка репозитория содержит следующие директории: 
-    docs - документация по выолененой работе
-    artifacts - исходные приложения для тестирования.
-    src - исходники тестов
-    reports - сгенерированный отчеты пройденных тестов
+    - docs - документация по выполненой работе
+      1. Plan.md ![a link]([https://github.com/n1ska/diploma/blob/main/docs/Plan.md])
+      2. Report.md  ![a link](https://github.com/n1ska/diploma/blob/main/docs/Report.md)
+      3. Summary.md ![a link](https://github.com/n1ska/diploma/blob/main/docs/Summary.md)
+    - artifacts - исходные приложения для тестирования.
+    - src - исходники тестов
+    - reports - сгенерированный отчеты пройденных тестов
     
 Для выполнения тестов:
 
