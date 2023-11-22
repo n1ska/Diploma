@@ -1,11 +1,7 @@
 package org.n1ska.page;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import org.n1ska.utils.PageInput;
 import org.n1ska.utils.PlasticCard;
-
-import java.util.ArrayList;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -20,79 +16,31 @@ public class BuyPage {
     public BuyPage() {
     }
 
-    public PageInput getInput(ArrayList<PageInput> inputs, String caption) {
-        for (var item : inputs) {
-            if (item.getCaption().equalsIgnoreCase(caption)) {
-                return item;
-            }
-        }
-        return null;
-    }
-
-    public PageInput getCardNoInput(ArrayList<PageInput> inputs) {
-        return getInput(inputs, CardNoCaption);
-    }
-
-
-    public PageInput getCardExpiryMonthInput(ArrayList<PageInput> inputs) {
-        return getInput(inputs, CardExpiryMonthCaption);
-    }
-
-    public PageInput getCardExpiryMonthInput() {
-        ArrayList<PageInput> inputs = extractInputControls();
-        return getInput(inputs, CardExpiryMonthCaption);
-    }
-
-    public PageInput getCardExpiryYearInput(ArrayList<PageInput> inputs) {
-        return getInput(inputs, CardExpiryYearCaption);
-    }
-
-    public PageInput getCardExpiryYearInput() {
-        ArrayList<PageInput> inputs = extractInputControls();
-        return getInput(inputs, CardExpiryYearCaption);
-    }
-
-    public PageInput getCardHolderInput(ArrayList<PageInput> inputs) {
-        return getInput(inputs, CardHolderCaption);
-    }
-
-    public PageInput getCardHolderInput() {
-        ArrayList<PageInput> inputs = extractInputControls();
-        return getInput(inputs, CardHolderCaption);
-    }
-
-    public PageInput getCardPassCodeInput(ArrayList<PageInput> inputs) {
-        return getInput(inputs, CardPassCodeCaption);
-    }
-
-    public PageInput getCardPassCodeInput() {
-        ArrayList<PageInput> inputs = extractInputControls();
-        return getInput(inputs, CardPassCodeCaption);
-    }
-
     public void setCard(PlasticCard card) {
-        ArrayList<PageInput> inputs = extractInputControls();
-        getCardNoInput(inputs).setValue(card.getCardNo());
-        getCardExpiryMonthInput(inputs).setValue(card.getExpiryMonth());
-        getCardExpiryYearInput(inputs).setValue(card.getExpiryYear());
-        getCardHolderInput(inputs).setValue(card.getHolderName());
-        getCardPassCodeInput(inputs).setValue(card.getPassCode());
+        setValue(CardNoCaption, card.getCardNo());
+        setValue(CardExpiryMonthCaption, card.getExpiryMonth());
+        setValue(CardExpiryYearCaption, card.getExpiryYear());
+        setValue(CardHolderCaption, card.getHolderName());
+        setValue(CardPassCodeCaption, card.getPassCode());
     }
 
     public void clickContinueButton() {
         $("form[action='/'] button").click();
     }
 
-    public ArrayList<PageInput> extractInputControls() {
-        $("form[action='/']").shouldBe(Condition.exist);
+    private void setValue(String caption, String value) {
+        getElement(caption).find("input").setValue(value);
+    }
 
-        var resultList = new ArrayList<PageInput>();
+    public SelenideElement getElement(String caption){
         var inputs = $$(".input__inner");
         for (SelenideElement item : inputs) {
-            var caption = item.find(".input__top").getText();
-            resultList.add(new PageInput(item, caption));
-        }
+            var captionElement = item.find(".input__top").getText();
 
-        return resultList;
+            if (captionElement.equalsIgnoreCase(caption)){
+                return item;
+            }
+        }
+        return null;
     }
 }
