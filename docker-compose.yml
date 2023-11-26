@@ -1,9 +1,8 @@
-# Use postgres/example user/password credentials
-version: '3.1'
+version: '3.8'
 
 services:
 
-  postgres:
+  postgres_db:
     image: postgres
     restart: always
     ports:
@@ -12,8 +11,13 @@ services:
       POSTGRES_PASSWORD: example
       POSTGRES_USER: app
       POSTGRES_DB: app
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -p 5432"]
+        interval: 5s
+        timeout: 5s
+        retries: 3
 
-  mysql:
+  mysql_db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
@@ -24,9 +28,32 @@ services:
       MYSQL_USER: app
       MYSQL_PASSWORD: example
       MYSQL_ROOT_PASSWORD: example
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:3306"]
+        interval: 5s
+        timeout: 5s
+        retries: 3
 
   gate_simulator:
     build: artifacts\gate-simulator
     restart: always
     ports:
       - "9999:9999"
+
+  aqa_shop_mysql:
+    build: artifacts\aqa-shop-mysql
+    restart: always
+    depends_on:
+      mysql_db:
+        condition: service_healthy
+    ports:
+      - "8081:8080"  
+  
+  aqa_shop_postgres:
+    build: artifacts\aqa-shop-postgres
+    restart: always
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+    ports:
+      - "8082:8080"

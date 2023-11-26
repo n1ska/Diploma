@@ -12,11 +12,15 @@ public class DataGenerator {
     private DataGenerator() {
     }
 
+    public static String generateAnyOneWord(){
+        var faker = new Faker(DefaultLocale);
+        return faker.lorem().word();
+    }
+
     public static String generateCardNumberValid()
     {
         return "4444 4444 4444 4441";
     }
-
     public static String generateCardNumberNotValid()
     {
         return "4444 4444 4444 4442";
@@ -25,28 +29,22 @@ public class DataGenerator {
     public static String generateCardPassCodeValid() {
         return String.valueOf(generateIntNum(100, 999));
     }
-
     public static String generateCardPassCodeNotValid() {
         return String.valueOf(generateIntNum(1, 99));
     }
 
-    public static String generateCardPassCodeNotValidFormat() {
-        return generateCardPassCodeNotValid().substring(1);
-    }
-
-    public static String generateCardHolderNameCyrilic() {
+    public static String generateCardHolderNameCyrillic() {
         Faker faker = new Faker(DefaultLocale);
         return faker.name().fullName();
     }
-
-    public static String generateCardHolderNameEng() {
+    public static String generateCardHolderNameValid() {
         Faker faker = new Faker(new Locale("en"));
         return faker.name().fullName();
     }
-
-    public static String generateCardHolderNameCharacters() {
+    public static String generateCardHolderNameSpecialCharacters() {
         return "%#$WSA5235'D'\"SDF";
     }
+
 
     public static String generateCardExpiryYearNoValid() {
         return String.valueOf(getCurrentYear() - generateIntNum(1, 5)).substring(2);
@@ -54,10 +52,10 @@ public class DataGenerator {
     public static String generateCardExpiryYearValid() {
         return  String.valueOf(getCurrentYear() + generateIntNum(0, 5)).substring(2);
     }
-
     public static String generateCardExpiryYearNoValidFormat() {
         return generateCardExpiryYearNoValid().substring(1);
     }
+
 
     public static String generateCardExpiryMonthNoValid(){
         return "14";

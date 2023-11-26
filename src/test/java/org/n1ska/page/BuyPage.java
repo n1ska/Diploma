@@ -1,5 +1,6 @@
 package org.n1ska.page;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.n1ska.utils.PlasticCard;
 
@@ -7,11 +8,11 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class BuyPage {
-    public final String CardNoCaption = "Номер карты";
-    public final String CardExpiryMonthCaption = "Месяц";
-    public final String CardExpiryYearCaption = "Год";
-    public final String CardHolderCaption = "Владелец";
-    public final String CardPassCodeCaption = "CVC/CVV";
+    private final String CardNoCaption = "Номер карты";
+    private final String CardExpiryMonthCaption = "Месяц";
+    private final String CardExpiryYearCaption = "Год";
+    private final String CardHolderCaption = "Владелец";
+    private final String CardPassCodeCaption = "CVC/CVV";
 
     public BuyPage() {
     }
@@ -42,5 +43,45 @@ public class BuyPage {
             }
         }
         return null;
+    }
+
+    public void ExistCaptionForExpiryMonthInput(String message)
+    {
+        getElement(CardExpiryMonthCaption)
+                .find(".input__sub")
+                .shouldBe(Condition.exist)
+                .shouldHave(Condition.text(message));
+    }
+
+    public void ExistCaptionForExpiryYearInput(String message)
+    {
+        getElement(CardExpiryYearCaption)
+                .find(".input__sub")
+                .shouldBe(Condition.exist)
+                .shouldHave(Condition.text(message));
+    }
+
+    public void ExistCaptionForPassCodeInput(String message)
+    {
+        getElement(CardPassCodeCaption)
+                .find(".input__sub")
+                .shouldBe(Condition.exist)
+                .shouldHave(Condition.text(message));
+    }
+
+    public void ContainsEmptyValueIntoPassCodeInput()
+    {
+        getElement(CardPassCodeCaption)
+                .find(".input__sub")
+                .shouldBe(Condition.exist)
+                .shouldHave(Condition.text(""));
+    }
+
+    public void ExistCaptionForHolderInput(String message)
+    {
+        getElement(CardHolderCaption)
+                .find(".input__sub")
+                .shouldBe(Condition.exist)
+                .shouldHave(Condition.text(message));
     }
 }

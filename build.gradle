@@ -1,9 +1,11 @@
 plugins {
     id 'java'
+    id 'io.qameta.allure' version '2.11.2'
 }
 
 group = 'org.n1ska'
 version = '1.0-SNAPSHOT'
+def allureVersion = "2.24.0"
 
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
@@ -22,6 +24,11 @@ dependencies {
     testImplementation 'com.google.code.gson:gson:2.8.6'
     implementation 'mysql:mysql-connector-java:8.0.32'
     implementation 'org.postgresql:postgresql:42.2.27'
+    testImplementation platform("io.qameta.allure:allure-bom:$allureVersion")
+    testImplementation "io.qameta.allure:allure-junit5"
+    testImplementation "io.qameta.allure:allure-assertj"
+    testImplementation "io.qameta.allure:allure-java-commons"
+    testImplementation "io.qameta.allure:allure-commandline:2.20.1"
 }
 
 test {
